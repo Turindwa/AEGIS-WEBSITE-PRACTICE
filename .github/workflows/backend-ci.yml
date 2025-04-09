@@ -24,9 +24,11 @@ jobs:
       - name: Install dependencies
         run: |
           cd aegis-backend
-          npm install
+          npm install # Install dependencies for Strapi 
+          
 
       - name: Build backend
         run: |
           cd aegis-backend
           npm run build  # Build Strapi project
+          
