@@ -1,12 +1,17 @@
+import { About } from "@/components/about"
+import { BusinessAreas } from "@/components/business-areas"
+import { Contact } from "@/components/contact"
+import { GroupCompanies } from "@/components/group-companies"
 import { Hero } from "@/components/hero"
 import { Services } from "@/components/services"
-import { BusinessAreas } from "@/components/business-areas"
-import { About } from "@/components/about"
-import { GroupCompanies } from "@/components/group-companies"
-import { Contact } from "@/components/contact"
 import Script from "next/script"
+import { getServices } from "@/lib/api"
+import { Service } from "@/types/types"
 
-export default function Home() {
+
+export default async function Home() {
+const services: Service[] = await getServices();
+
   // Structured data for the homepage
   const structuredData = {
     "@context": "https://schema.org",
@@ -47,9 +52,9 @@ export default function Home() {
       />
       <div className="flex flex-col w-full">
         <Hero />
-        <BusinessAreas />
-        <Services />
         <About />
+        <Services services={services}/>
+        <BusinessAreas />
         <GroupCompanies />
         <Contact />
       </div>

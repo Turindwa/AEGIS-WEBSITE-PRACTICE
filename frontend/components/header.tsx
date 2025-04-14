@@ -1,18 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X, Building2, Shield, FileText, Globe, Briefcase, Phone, Mail, MapPin, Sun, Moon } from "lucide-react"
+import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Logo } from "@/components/logo"
+import { Briefcase, Building2, ChevronDown, FileText, Globe, Mail, MapPin, Menu, Moon, Phone, Shield, Sun, X } from "lucide-react"
 import { useTheme } from "next-themes"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [menuTimeout, setMenuTimeout] = useState<NodeJS.Timeout | null>(null);
+
 
   useEffect(() => {
     setMounted(true)
@@ -24,11 +26,14 @@ export function Header() {
   }
 
   const handleMouseEnter = (menu: string) => {
+    if (menuTimeout) clearTimeout(menuTimeout) 
     setActiveMegaMenu(menu)
   }
 
   const handleMouseLeave = () => {
-    setActiveMegaMenu(null)
+    if (menuTimeout) clearTimeout(menuTimeout)
+    const timeout = setTimeout(() => setActiveMegaMenu(null), 200)
+    setMenuTimeout(timeout)
   }
 
   const toggleTheme = () => {
@@ -68,7 +73,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60">
       <div className="container flex h-20 items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ml-4">
           <Logo />
         </div>
 
@@ -84,7 +89,7 @@ export function Header() {
                 activeMegaMenu === "services" ? "text-primary" : "",
               )}
             >
-              事業内容
+              事業内容 <ChevronDown className="w-4 h-4" />
             </button>
             {activeMegaMenu === "services" && (
               <div className="absolute top-full left-0 mt-2 w-[550px] rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl">
@@ -165,7 +170,7 @@ export function Header() {
                 activeMegaMenu === "about" ? "text-primary" : "",
               )}
             >
-              会社案内
+              会社案内 <ChevronDown className="w-4 h-4" />
             </button>
             {activeMegaMenu === "about" && (
               <div className="absolute top-full left-0 mt-2 w-[400px] rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl">
@@ -225,7 +230,7 @@ export function Header() {
                 activeMegaMenu === "contact" ? "text-primary" : "",
               )}
             >
-              お問い合わせ
+              お問い合わせ <ChevronDown className="w-4 h-4" />
             </button>
             {activeMegaMenu === "contact" && (
               <div className="absolute top-full right-0 mt-2 w-[400px] rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl">
@@ -273,10 +278,9 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              <span className="sr-only">Toggle theme</span>
+              {mounted && theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
           )}
         </nav>
@@ -421,6 +425,7 @@ export function Header() {
                 お問い合わせフォームへ
               </Link>
             </Button>
+            
           </nav>
         </div>
       </div>

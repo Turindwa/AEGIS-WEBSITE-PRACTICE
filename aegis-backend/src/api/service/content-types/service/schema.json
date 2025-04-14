@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "shield",
+        "Globe",
+        "FileText",
+        "Building2"
+      ],
+      "required": true
+    },
+    "bgColor": {
+      "type": "string"
+    },
+    "hoverColor": {
+      "type": "string"
+    }
+  }
+}
