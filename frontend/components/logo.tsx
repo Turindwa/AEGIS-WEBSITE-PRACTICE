@@ -1,5 +1,5 @@
-import Link from "next/link"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface LogoProps {
   className?: string
@@ -20,13 +20,16 @@ export function Logo({ className, size = "md" }: LogoProps) {
   }
 
   return (
-    <Link href="/" className={cn("flex items-center", className)}>
-      <div className="flex flex-col">
-        <div className="flex items-center">
-          <span className={cn("font-bold text-red-600", sizes[size])}>A</span>
-          <span className={cn("font-bold text-gray-900 dark:text-white", sizes[size])}>EGIS</span>
-        </div>
-        <span className={cn("text-gray-600 dark:text-gray-400 -mt-1", groupSizes[size])}>GROUP</span>
+    <Link href="/" className={cn("inline-flex items-start", className)}>
+      <div className="flex items-center space-x-1">
+      <h1 className={cn("font-extrabold text-4xl sm:text-5xl text-gray-900 dark:text-white animate-pulse", sizes[size])}>
+      <span className="text-red-600 animate-pulse">A</span><span>EGIS</span>
+    </h1>
+
+    {/* Small GROUP positioned on the right */}
+    <span className={cn("text-red-600 dark:text-red-400 underline decoration-2 decoration-red-600 animate-pulse", groupSizes[size])}>
+      GROUP
+    </span>
       </div>
     </Link>
   )

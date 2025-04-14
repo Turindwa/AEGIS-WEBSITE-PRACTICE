@@ -13,12 +13,13 @@
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
-    
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.12.3",
     "@strapi/plugin-users-permissions": "5.12.3",
     "@strapi/strapi": "5.12.3",
+    "@tanstack/react-query": "^5.74.0",
+    "@tanstack/react-query-devtools": "^5.74.0",
     "better-sqlite3": "11.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
