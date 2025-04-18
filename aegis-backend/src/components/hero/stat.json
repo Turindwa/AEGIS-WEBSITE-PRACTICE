@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_hero_stats",
+  "info": {
+    "displayName": "Stat"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": false
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}
