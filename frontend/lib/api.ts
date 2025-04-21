@@ -30,7 +30,33 @@ interface Service {
       label: string;
     }[];
   }
+  export interface RichTextChild {
+    text: string;
+  }
   
+  export interface RichTextBlock {
+    type: string;
+    children: RichTextChild[];
+  }
+  export interface BusinessArea {
+    id: number;
+    title: string;
+    description: RichTextBlock[];
+    iconName: string;
+    image: {
+      url: string;
+    }
+  }
+  
+  export interface DetailedBusinessArea {
+    id: number;
+    title: string;
+    description: RichTextBlock[];
+    iconName: string;
+    image: {
+      url: string;
+    }
+  }
   
   
   
@@ -74,4 +100,47 @@ interface Service {
     };
 }
   
-  
+ // Fetch business areas
+export async function getBusinessAreas(): Promise<BusinessArea[]> {
+  const res = await fetch("http://localhost:1337/api/business-areas?populate=*");
+  if (!res.ok) throw new Error("Failed to fetch business areas");
+  const json = await res.json();
+
+  const data: BusinessArea[] = json.data;
+  console.log(json.data);
+
+  return data.map((item) => ({
+    id: item.id || 1,
+    title: item.title || "Business Area title",
+    description: item.description || [],
+    iconName: item.iconName || "default",  // Match your `iconMap` key
+    image: {
+      url: item.image && item.image.url
+        ? `http://localhost:1337${item.image.url}`
+        : "/placeholder.svg"
+    },
+  }));
+}
+
+// Fetch detailed business areas
+export async function getDetailedBusinessAreas(): Promise<DetailedBusinessArea[]> {
+  const res = await fetch("http://localhost:1337/api/detailed-business-areas?populate=*");
+  if (!res.ok) throw new Error("Failed to fetch detailed business areas");
+  const json = await res.json();
+
+  const data: DetailedBusinessArea[] = json.data;
+  console.log(json.data);
+
+  return data.map((item) => ({
+    id: item.id || 1,
+    title: item.title || "Detailed Business Area title",
+    description: item.description || [],
+    
+    iconName: item.iconName || "default-icon",  // Provide a default if iconName is undefined
+    image: {
+      url: item.image && item.image.url
+        ? `http://localhost:1337${item.image.url}`
+        : "/placeholder.svg" // Provide a default image URL if image is missing
+    },
+  }));
+} 

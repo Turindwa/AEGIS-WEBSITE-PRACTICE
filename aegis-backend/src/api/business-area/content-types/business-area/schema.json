@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "business_areas",
+  "info": {
+    "singularName": "business-area",
+    "pluralName": "business-areas",
+    "displayName": "business-area"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "iconName": {
+      "type": "enumeration",
+      "enum": [
+        "Shield",
+        "Building2",
+        "FileText",
+        "Droplet",
+        "RouteIcon ",
+        "Flame",
+        "HandshakeIcon",
+        "MonitorIcon"
+      ],
+      "required": true
+    }
+  }
+}

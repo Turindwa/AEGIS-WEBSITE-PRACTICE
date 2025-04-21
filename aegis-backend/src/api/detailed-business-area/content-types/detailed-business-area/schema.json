@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "detailed_business_areas",
+  "info": {
+    "singularName": "detailed-business-area",
+    "pluralName": "detailed-business-areas",
+    "displayName": "detailed-business-area"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "iconName": {
+      "type": "enumeration",
+      "enum": [
+        "Road",
+        "Shield",
+        "Flame"
+      ]
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

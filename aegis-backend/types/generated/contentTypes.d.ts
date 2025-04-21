@@ -369,6 +369,82 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBusinessAreaBusinessArea
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'business_areas';
+  info: {
+    displayName: 'business-area';
+    pluralName: 'business-areas';
+    singularName: 'business-area';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    iconName: Schema.Attribute.Enumeration<
+      [
+        'Shield',
+        'Building2',
+        'FileText',
+        'Droplet',
+        'RouteIcon ',
+        'Flame',
+        'HandshakeIcon',
+        'MonitorIcon',
+      ]
+    > &
+      Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::business-area.business-area'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDetailedBusinessAreaDetailedBusinessArea
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'detailed_business_areas';
+  info: {
+    displayName: 'detailed-business-area';
+    pluralName: 'detailed-business-areas';
+    singularName: 'detailed-business-area';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    iconName: Schema.Attribute.Enumeration<['Road', 'Shield', 'Flame']>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::detailed-business-area.detailed-business-area'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHeroSectionHeroSection extends Struct.CollectionTypeSchema {
   collectionName: 'hero_sections';
   info: {
@@ -953,6 +1029,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::business-area.business-area': ApiBusinessAreaBusinessArea;
+      'api::detailed-business-area.detailed-business-area': ApiDetailedBusinessAreaDetailedBusinessArea;
       'api::hero-section.hero-section': ApiHeroSectionHeroSection;
       'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
