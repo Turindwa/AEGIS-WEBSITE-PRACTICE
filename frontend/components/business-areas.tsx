@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { renderRichText } from "@/lib/richer"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Shield,
@@ -88,10 +89,9 @@ export function BusinessAreas() {
                 <div className="text-white mb-2">{iconMap[area.iconName]}</div>
                 <h3 className="text-xl font-bold text-white mb-2">{area.title}</h3>
                
-                <div
-                  className="text-sm text-white/80 text-center"
-                  dangerouslySetInnerHTML={{ __html: area.description }}
-                />
+                <div className="text-sm text-white/80 text-center">
+                  {renderRichText(area.description)}
+                </div>
               </div>
             </div>
           ))}
@@ -118,10 +118,9 @@ export function BusinessAreas() {
                 </div>
               </div>
               <CardContent className="pt-4">
-              <div
-              className="text-gray-600 dark:text-gray-400"
-              dangerouslySetInnerHTML={{ __html: area.description }}
-              />
+              <div className="text-gray-600 dark:text-gray-400">
+              {renderRichText(area.description)}
+              </div>
                 
               </CardContent>
             </Card>
